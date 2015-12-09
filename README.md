@@ -4,15 +4,13 @@ A simple directive for adding google places autocomplete to a textbox element.
 
 Updated to now use ng-model, should work much better in forms. Can now set an initial value using ng-model. Using the ng-model to set the textbox value does not trigger the autocomplete query.
 
-Tested with angularjs-1.2.4
+Tested with angularjs-1.4.7
 
 Uses optional directive parameters, so it won't work with <1.2. If people are interested I'll release a <1.2 version.
 
-## Examples
+## Example
 
-+ [Example Plunkers - Simple Usage](http://plnkr.co/edit/GE34ojss9xMGm0024FvM?p=preview)
-
-+ [Example Plunkers - Advanced Usage](http://plnkr.co/edit/GF3nM3XfYX9El2w11pGo?p=preview)
++ [Example Plunker - Simple Usage](http://plnkr.co/edit/opD7Btc8GCxyUxq23VpL?p=preview)
 
 ## Usage
 
@@ -45,6 +43,8 @@ Add the directive to a textbox
 	+ country: country    String, ISO 3166-1 Alpha-2 compatible country code. examples; 'ca', 'us', 'gb'
     + watchEnter:         Boolean, true; on Enter select top autocomplete result. false(default); enter ends autocomplete  
 
++ details-change - Function, called with two parameters (newValue, oldValue) when place details are updated. (Optional)
+
 example: 
 ``` javascript
 options = {
@@ -57,6 +57,10 @@ google places autocomplete info: https://developers.google.com/maps/documentatio
 
 ## Author
 
+Fork : 
+**Morgan Wattiez** (https://github.com/MorganGeek/ - https://twitter.com/MorganGeek)
+
+Original : 
 **Will Palahnuk** (http://github.com/wpalahnuk)
 
 ## Credits
@@ -67,7 +71,7 @@ google places autocomplete https://developers.google.com/maps/documentation/java
 
     The MIT License
 
-	Copyright (c) 2014 Will Palahnuk
+	Copyright (c) 2015 Will Palahnuk
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
