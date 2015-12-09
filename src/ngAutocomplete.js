@@ -6,7 +6,7 @@
  *
  * Usage:
  *
- * <input type="text"  ng-autocomplete ng-model="autocomplete" options="options" details="details/>
+ * <input type="text"  ng-autocomplete ng-model="autocomplete" options="options" details="details" details-change="onDetailsChange"/>
  *
  * + ng-model - autocomplete textbox value
  *
@@ -18,6 +18,8 @@
  *       + bounds: bounds,     Google maps LatLngBounds Object, biases results to bounds, but may return results outside these bounds
  *       + country: country    String, ISO 3166-1 Alpha-2 compatible country code. examples; 'ca', 'us', 'gb'
  *       + watchEnter:         Boolean, true; on Enter select top autocomplete result. false(default); enter ends autocomplete
+ * 
+ * + details-change - Function, called with two parameters (newValue, oldValue) when place details are updated. (Optional)
  *
  * example:
  *
@@ -34,14 +36,17 @@ angular.module( "ngAutocomplete", [])
       scope: {
         ngModel: '=',
         options: '=?',
-        details: '=?'
+        details: '=?',
+        detailsChange: '&'
       },
 
       link: function(scope, element, attrs, controller) {
 
         //options for autocomplete
         var opts
+        var oldDetails
         var watchEnter = false
+        var watchDetails = false
         //convert options provided to opts
         var initOpts = function() {
 
@@ -53,6 +58,9 @@ angular.module( "ngAutocomplete", [])
             } else {
               watchEnter = true
             }
+            
+            if (angular.isFunction(scope.detailsChange())) 
+            	watchDetails = true
 
             if (scope.options.types) {
               opts.types = []
@@ -91,7 +99,8 @@ angular.module( "ngAutocomplete", [])
               scope.$apply(function() {
 
                 scope.details = result;
-
+                if (watchDetails) scope.detailsChange()(result, oldDetails);
+                oldDetails = result;
                 controller.$setViewValue(element.val());
               });
             }
@@ -117,6 +126,8 @@ angular.module( "ngAutocomplete", [])
 
                   scope.$apply(function() {
                     scope.details = null;
+                    if (watchDetails) ondetailsChange()(null, oldDetails);
+                    oldDetails = null;
                   });
 
                 } else {
@@ -128,10 +139,11 @@ angular.module( "ngAutocomplete", [])
                       if (placesServiceStatus == google.maps.GeocoderStatus.OK) {
                         scope.$apply(function() {
 
+                          scope.details = detailsResult;
                           controller.$setViewValue(detailsResult.formatted_address);
                           element.val(detailsResult.formatted_address);
-
-                          scope.details = detailsResult;
+                          if (watchDetails) scope.detailsChange()(detailsResult, oldDetails);
+                          oldDetails = detailsResult;
 
                           //on focusout the value reverts, need to set it again.
                           var watchFocusOut = element.on('focusout', function(event) {
@@ -160,7 +172,6 @@ angular.module( "ngAutocomplete", [])
         scope.$watch(scope.watchOptions, function () {
           initOpts()
         }, true);
-
       }
     };
   });

@@ -1,8 +1,8 @@
 angular.module( "Test", ['ngAutocomplete'])
-  .controller("TestCtrl",function ($scope) {
+  .controller("TestCtrl", function ($scope) {
 
     $scope.result = ''
-//    $scope.details = ''
+    $scope.onDetailsChange = onDetailsChange;
     $scope.options = {};
 
     $scope.form = {
@@ -13,6 +13,10 @@ angular.module( "Test", ['ngAutocomplete'])
       boundsEnabled: false,
       componentEnabled: false,
       watchEnter: true
+    }
+
+    function onDetailsChange(newValue, oldValue) {
+
     }
 
     //watch form for changes

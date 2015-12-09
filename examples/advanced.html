@@ -103,7 +103,7 @@
 
     <div class="form-group move-down">
       <label for="Autocomplete2">Autocomplete Model</label>
-      <input type="text" id="Autocomplete2" ng-model="autocomplete" class="form-control" ng-autocomplete options="options" details="details"/>
+      <input type="text" id="Autocomplete2" ng-model="autocomplete" class="form-control" ng-autocomplete options="options" details="details" details-change="onDetailsChange"/>
 
       <br>
       <b>autocomplete</b>: {{autocomplete}}
@@ -119,11 +119,10 @@
 <div>
 
   <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 
   <script type="text/javascript" src="/assets/src/ngAutocomplete.js"></script>
   <script type="text/javascript" src="/assets/examples/advanced.js"></script>
-  <script type="text/javascript" src="/assets/src/ngAutocomplete.js"></script>
 
 </div>
 
