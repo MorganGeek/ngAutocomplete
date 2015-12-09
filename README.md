@@ -10,7 +10,7 @@ Uses optional directive parameters, so it won't work with <1.2. If people are in
 
 ## Example
 
-+ [Example Plunker - Simple Usage](http://plnkr.co/edit/opD7Btc8GCxyUxq23VpL?p=preview)
++ [Example Plunker - Simple Usage](http://plnkr.co/edit/O5phTG?p=preview)
 
 ## Usage
 
